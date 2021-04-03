@@ -6,6 +6,9 @@ class User < ApplicationRecord
   # フォーマットと一意であることの確認
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
-  			format: { with: VALID_EMAIL_REGEX }
-  			uniqueness: true
+  			format: { with: VALID_EMAIL_REGEX },
+        uniqueness: true
+  # passwordをハッシュ化しセキュアに設定する
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
 end
